@@ -1,0 +1,5 @@
+[docker]
+52.207.240.158 ansible_user=ubuntu
+
+[develop:children]
+docker

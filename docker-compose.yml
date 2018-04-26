@@ -1,0 +1,33 @@
+#
+# Minimal Drupal 8.x development environment.
+#
+
+version: '2'
+services:
+  web:
+    image: "php:7.2-apache"
+    working_dir: "/var/www/html"
+    volumes:
+      - ./*:/var/www/html
+    links:
+      - "db"
+    ports:
+      - "80"
+
+  db:
+    image: "mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - ".:/var/www/html"
+
+  composer:
+    image: composer/composer:php7
+    command: install
+    volumes:
+      - ./app:/app
