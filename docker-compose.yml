@@ -23,11 +23,6 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
-    volumes:
-      - ".:/var/www/html"
 
-  composer:
-    image: composer/composer:php7
-    command: install
-    volumes:
-      - ./app:/app
+volumes:
+  db:

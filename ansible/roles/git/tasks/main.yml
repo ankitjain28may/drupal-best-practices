@@ -8,4 +8,4 @@
     accept_hostkey: yes
 
 - name: Run the docker composer
-  command: cd /var/www/html && docker-compose
+  command: docker-compose
