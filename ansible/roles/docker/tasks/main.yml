@@ -55,21 +55,21 @@
     - docker
 
 # sudo groupadd docker
-# - name: Create "docker" group
-#   group:
-#     name: "{{ docker_group }}"
-#     state: present
-#   tags:
-#     - docker
+- name: Create "docker" group
+  group:
+    name: "{{ docker_group }}"
+    state: present
+  tags:
+    - docker
 
-# # sudo usermod -aG docker ubuntu
-# - name: Add remote "ubuntu" user to "docker" group
-#   user:
-#     name: "{{ remote_user }}"
-#     group: "{{ docker_group }}"
-#     append: yes
-#   tags:
-#     - docker
+# sudo usermod -aG docker ubuntu
+- name: Add remote "ubuntu" user to "docker" group
+  user:
+    name: "{{ remote_user }}"
+    group: "{{ docker_group }}"
+    append: yes
+  tags:
+    - docker
 
 # sudo apt-get install docker-compose=1.8.*
 - name: Install docker-compose

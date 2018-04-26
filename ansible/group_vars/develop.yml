@@ -2,6 +2,7 @@
 
 #// user account used to ssh the hosts
 remote_user: ubuntu
+docker_group: docker
 
 #// non-sudo user to be created for running process
 # action_user: tedcheng
