@@ -1,9 +1,9 @@
 server {
     listen 80 default_server;
 
-    root /var/www/html/web;
+    root /var/www/html;
 
-    index index.html index.htm index.php;
+    index index.php index.html index.htm index.php;
 
     server_name _;
 
@@ -18,7 +18,8 @@ server {
 
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        # fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        fastcgi_pass 127.0.0.1:9000;
     }
 
     error_page 404 /index.php;

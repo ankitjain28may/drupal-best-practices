@@ -10,6 +10,7 @@ RUN buildDeps=" \
         libmcrypt-dev \
     " \
     runtimeDeps=" \
+        nginx \
         curl \
         git \
         libfreetype6-dev \
@@ -31,6 +32,7 @@ RUN buildDeps=" \
     && docker-php-ext-install exif \
     && pecl install memcached redis \
     && docker-php-ext-enable memcached.so redis.so \
+    && mkdir /run/php \
     && apt-get purge -y --auto-remove $buildDeps \
     && rm -r /var/lib/apt/lists/*
 
@@ -38,3 +40,10 @@ RUN buildDeps=" \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && ln -s $(composer config --global home) /root/composer
 ENV PATH $PATH:/root/composer/vendor/bin
+
+COPY default /etc/nginx/sites-available/default
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+EXPOSE 80
