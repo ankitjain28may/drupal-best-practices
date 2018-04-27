@@ -1,5 +1,5 @@
 [docker]
-54.174.183.22 ansible_user=ubuntu
+139.59.18.27 ansible_user=root
 
 [develop:children]
 docker
