@@ -15,15 +15,10 @@ services:
         build:
           context: ./docker/webserver
           dockerfile: Dockerfile
-        image: web/php
+        image: php-server
         restart: always
         volumes:
             - .:/var/www/html
-    composer:
-        image: composer
-        volumes:
-            - .:/app
-        command: install
     db:
         image: "mysql"
         ports:
