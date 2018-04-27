@@ -14,6 +14,7 @@ RUN apt-get update -y && \
     libbz2-dev \
     gettext-base \
     locales && \
+    git \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -26,7 +27,5 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/
 RUN ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
 
-
 EXPOSE 80
-
 RUN a2enmod rewrite
