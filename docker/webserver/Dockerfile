@@ -14,11 +14,12 @@ RUN apt-get update -y && \
     libbz2-dev \
     gettext-base \
     locales && \
-    git \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install -j$(nproc) curl gd intl json readline tidy zip bcmath xml mbstring pdo_mysql bz2
+
+RUN apt-get install -y git
 
 RUN chown -R www-data:www-data /var/www/html
 
