@@ -19,10 +19,13 @@ RUN apt-get update -y && \
 
 RUN docker-php-ext-install -j$(nproc) curl gd intl json readline tidy zip bcmath xml mbstring pdo_mysql bz2
 
-RUN a2enmod rewrite
-RUN service apache2 restart
+RUN chown -R www-data:www-data /var/www/html
 
-WORKDIR /var/www/html
+#setup composer
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/
+RUN ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
+
 
 EXPOSE 80
 

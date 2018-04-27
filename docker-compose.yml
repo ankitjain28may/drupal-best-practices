@@ -5,15 +5,17 @@
 version: '2'
 services:
   web:
-    image: "php:7.2-apache"
-    build: ./docker/webserver
+    build:
+      context: ./docker/webserver
+      dockerfile: Dockerfile
+    image: drupal/web
     working_dir: "/var/www/html"
     volumes:
-      - ./*:/var/www/html
+     - .:/var/www/html
     links:
       - "db"
     ports:
-      - "80"
+      - "80:80"
 
   db:
     image: "mysql"
@@ -29,3 +31,4 @@ services:
 
 volumes:
   db:
+
