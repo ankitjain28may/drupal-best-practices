@@ -1,29 +1,38 @@
 server {
     listen 80 default_server;
 
-    root /var/www/html;
+    root /var/www/html/web;
 
     index index.php index.html index.htm index.php;
 
     server_name _;
 
-    charset utf-8;
-
-    location = /favicon.ico { log_not_found off; access_log off; }
-    location = /robots.txt  { log_not_found off; access_log off; }
-
     location / {
-        try_files $uri $uri/ /index.php$is_args$args;
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404
+        #proxy_pass http://139.59.183.112:8000;
+        try_files $uri $uri/ /index.php?$query_string;
     }
 
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
     location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        # fastcgi_pass unix:/run/php/php7.2-fpm.sock;
-        fastcgi_pass 127.0.0.1:9000;
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        #include snippets/fastcgi-php.conf;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    #
+    #   # With php7.2-cgi alone:
+        fastcgi_pass 127.0.0.1:8000;
+    #   # With php7.2-fpm:
+        #fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     }
 
-    error_page 404 /index.php;
-
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
     location ~ /\.ht {
         deny all;
     }
