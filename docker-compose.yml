@@ -1,21 +1,21 @@
 version: '2'
 services:
-    php:
+    d8-php:
         build:
           context: ./docker/webserver
           dockerfile: Dockerfile
         image: php-server
-        restart: always
+        container_name: d8-php
         volumes:
           - .:/var/www/html
-        depends_on:
-          - db
         links:
-          - db:db
+          - d8-db
         networks:
           - nginxphp
-    db:
+        restart: always
+    d8-db:
         image: "mysql"
+        container_name: d8-db
         ports:
           - "3306:3306"
         volumes:
@@ -27,6 +27,7 @@ services:
           MYSQL_ROOT_PASSWORD: secret
         networks:
           - nginxphp
+        restart: always
 
 volumes:
   db:
