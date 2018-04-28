@@ -1,0 +1,27 @@
+version: '2'
+services:
+    php:
+        build:
+          context: ./docker/webserver
+          dockerfile: Dockerfile
+        image: php-server
+        restart: always
+        volumes:
+            - .:/var/www/html
+        links:
+            - db
+    db:
+        image: "mysql"
+        ports:
+          - "3306:3306"
+        volumes:
+          - ./db:/var/lib/mysql
+        environment:
+          MYSQL_DATABASE: drupal
+          MYSQL_USER: user
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: secret
+
+volumes:
+  db:
+
