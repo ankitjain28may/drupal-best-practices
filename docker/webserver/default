@@ -25,7 +25,7 @@ server {
         include fastcgi_params;
     #
     #   # With php7.2-cgi alone:
-        fastcgi_pass 127.0.0.1:8000;
+        fastcgi_pass 127.0.0.1:9000;
     #   # With php7.2-fpm:
         #fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     }
