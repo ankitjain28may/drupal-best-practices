@@ -43,6 +43,8 @@ ENV PATH $PATH:/root/composer/vendor/bin
 
 COPY default /etc/nginx/sites-available/default
 
+RUN service nginx restart
+
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 

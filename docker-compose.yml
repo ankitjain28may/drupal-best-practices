@@ -7,9 +7,13 @@ services:
         image: php-server
         restart: always
         volumes:
-            - .:/var/www/html
+          - .:/var/www/html
+        depends_on:
+          - db
         links:
-            - db
+          - db:db
+        networks:
+          - nginxphp
     db:
         image: "mysql"
         ports:
@@ -21,7 +25,12 @@ services:
           MYSQL_USER: user
           MYSQL_PASSWORD: secret
           MYSQL_ROOT_PASSWORD: secret
+        networks:
+          - nginxphp
 
 volumes:
   db:
+networks:
+  nginxphp:
+driver: local
 
