@@ -1,0 +1,11 @@
+---
+
+- name: Import Config
+  command: docker exec drupal composer drupal ci
+  args:
+    chdir: /var/www/html
+
+- name: Rebuild Cache
+  command: docker exec drupal composer drupal cr
+  args:
+    chdir: /var/www/html

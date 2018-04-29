@@ -13,7 +13,7 @@
     - docker
 
 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-- name: Add Docker s official GPG key
+- name: Add Docker's official GPG key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present

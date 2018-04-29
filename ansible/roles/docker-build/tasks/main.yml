@@ -1,0 +1,10 @@
+---
+
+- name: Delete previous images
+  command: docker rm drupal drupalmysql -f
+  ignore_errors: yes
+
+- name: Run the docker composer
+  command: docker-compose up -d --build
+  args:
+    chdir: /var/www/html

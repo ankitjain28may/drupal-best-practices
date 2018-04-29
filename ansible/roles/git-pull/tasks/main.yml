@@ -1,0 +1,11 @@
+---
+
+- name: Stash local changes
+  command: git stash
+  args:
+    chdir: /var/www/html
+
+- name: Pull lastest changes
+  command: git pull origin HEAD
+  args:
+    chdir: /var/www/html

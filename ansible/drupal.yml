@@ -1,8 +1,0 @@
----
-
-- name: Configuration to "remote" host
-  hosts: docker
-  become: true
-  roles:
-    - docker
-    - git

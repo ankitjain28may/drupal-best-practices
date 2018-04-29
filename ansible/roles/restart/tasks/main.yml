@@ -1,0 +1,9 @@
+---
+
+- name: Restart Drupal Container
+  command: docker restart drupal
+  args:
+    chdir: /var/www
+
+- pause:
+    minutes: 2

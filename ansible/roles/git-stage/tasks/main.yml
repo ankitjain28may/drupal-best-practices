@@ -1,0 +1,8 @@
+---
+
+- name: Clone Github Stage branch 'branch name - develop'
+  git:
+    repo: https://github.com/ankitjain28may/drupal-best-practices.git
+    dest: /var/www/html
+    version: develop
+    accept_hostkey: yes

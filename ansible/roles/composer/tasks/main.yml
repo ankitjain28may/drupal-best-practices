@@ -1,0 +1,7 @@
+---
+
+- name: Install Composer without dependencies
+  command: docker exec drupal composer install
+  args:
+    chdir: /var/www/html
+

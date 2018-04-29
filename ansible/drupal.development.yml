@@ -1,0 +1,12 @@
+---
+
+- name: Development to "remote" host
+  hosts: docker
+  become: true
+  roles:
+    - docker-install
+    - git-pull
+    - env
+    - restart
+    - composer
+    - drupal

@@ -1,0 +1,6 @@
+---
+
+- name: COPY .ENV file
+  command: cp .env.ansible .env
+  args:
+    chdir: /var/www/html

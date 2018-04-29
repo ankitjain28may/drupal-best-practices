@@ -1,0 +1,17 @@
+---
+
+- name: stat html
+  stat: path=/var/www/html
+  register: html_stat
+
+- name: Move html to backup
+  command: mv html backup
+  when: html_stat.stat.exists
+  args:
+    chdir: /var/www
+
+- name: Create html dir
+  command: mkdir html
+  args:
+    chdir: /var/www
+
