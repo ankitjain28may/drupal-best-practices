@@ -7,7 +7,12 @@
     version: master
     accept_hostkey: yes
 
+- name: COPY .ENV file
+  command: cp .env.ansible .env
+  args:
+    chdir: /var/www/html
+
 - name: Run the docker composer
-  command: docker-compose up -d
+  command: docker-compose rm -vf up -d
   args:
     chdir: /var/www/html

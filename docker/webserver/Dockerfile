@@ -76,6 +76,8 @@ RUN apt-get install -y php7.2-fpm \
 
 RUN pecl install mcrypt-1.0.1
 
+RUN apt-get install mysql-server
+
 # Cleanup
 RUN apt-get remove --purge -y software-properties-common \
     python-software-properties && \
@@ -122,6 +124,7 @@ COPY ./cmd.sh /
 # mount www directory as a workdir
 COPY . /var/www/html
 
+
 RUN rm -f /etc/nginx/sites-enabled/default && \
     ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default && \
     chmod 755 /cmd.sh && \
@@ -133,3 +136,7 @@ RUN rm -f /etc/nginx/sites-enabled/default && \
 EXPOSE 80 3306 22
 
 ENTRYPOINT ["/bin/bash", "/cmd.sh"]
+
+WORKDIR /var/www/html
+
+RUN composer install
