@@ -12,7 +12,12 @@
   args:
     chdir: /var/www/html
 
+- name: Delete previous images
+  command: docker rm drupal drupal-mysql -f
+
+
 - name: Run the docker composer
   command: docker-compose up -d --build
   args:
     chdir: /var/www/html
+

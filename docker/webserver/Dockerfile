@@ -135,3 +135,5 @@ EXPOSE 80 3306 22
 
 ENTRYPOINT ["/bin/bash", "/cmd.sh"]
 
+WORKDIR /var/www/html
+
