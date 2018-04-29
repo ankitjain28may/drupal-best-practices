@@ -1,21 +1,24 @@
 version: '2'
 services:
-    d8-php:
+    drupal:
         build:
           context: ./docker/webserver
           dockerfile: Dockerfile
         image: php-server
-        container_name: d8-php
+        container_name: drupal
+        ports:
+          - "80:80"
+          - "8028:22"
         volumes:
           - .:/var/www/html
         links:
-          - d8-db
+          - "database:mysql"
         networks:
           - nginxphp
         restart: always
-    d8-db:
+    database:
         image: "mysql"
-        container_name: d8-db
+        container_name: drupal-mysql
         ports:
           - "3306:3306"
         volumes:

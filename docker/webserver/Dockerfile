@@ -130,6 +130,6 @@ RUN rm -f /etc/nginx/sites-enabled/default && \
     touch /etc/cron.d/crontasks
 
 # Expose Ports
-EXPOSE 80
+EXPOSE 80 3306 22
 
 ENTRYPOINT ["/bin/bash", "/cmd.sh"]
