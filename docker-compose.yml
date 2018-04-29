@@ -24,6 +24,8 @@ services:
           MYSQL_USER: user
           MYSQL_PASSWORD: secret
           MYSQL_ROOT_PASSWORD: secret
+        volumes:
+          - ./db-dump:/docker-entrypoint-initdb.d
         networks:
           - nginxphp
         restart: always
