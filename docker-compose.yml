@@ -19,10 +19,6 @@ services:
     drupalmysql:
         image: "mariadb"
         container_name: drupalmysql
-        ports:
-          - "3306:3306"
-        volumes:
-          - ./db:/var/lib/mysql
         environment:
           MYSQL_DATABASE: drupal
           MYSQL_USER: user
