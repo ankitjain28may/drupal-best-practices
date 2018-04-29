@@ -12,7 +12,7 @@ services:
         volumes:
           - .:/var/www/html
         links:
-          - "database:mysql"
+          - "drupalmysql:mysql"
         networks:
           - nginxphp
         restart: always
