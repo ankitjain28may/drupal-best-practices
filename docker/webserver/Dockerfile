@@ -35,9 +35,18 @@ RUN apt-get update && apt-get upgrade -y && \
         cron
 
 # Install mcrypt
-RUN apt-get install php-pecl \
-    && apt-get install libmcrypt-dev libreadline-dev \
-    && pecl install mcrypt-1.0.1
+# Install mcrypt
+RUN apt-get install -y php-pear \
+    && apt-get install -y libmcrypt-dev libreadline-dev \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libldap2-dev \
+    libmemcachedutil2 \
+    libpng-dev \
+    libpq-dev \
+    libxml2-dev \
+    gcc make autoconf libc-dev pkg-config
 
 
     # Install PHP
@@ -62,7 +71,10 @@ RUN apt-get install -y php7.2-fpm \
         php7.2-zip \
         php7.2-cli \
         php7.2-sybase \
-        php7.2-odbc
+        php7.2-odbc \
+        php7.2-dev
+
+RUN pecl install mcrypt-1.0.1
 
 # Cleanup
 RUN apt-get remove --purge -y software-properties-common \
@@ -94,13 +106,13 @@ RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf &
     sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php/7.2/fpm/pool.d/www.conf && \
 
     # mcrypt configuration
-    phpenmod mcrypt && \
+    bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini" \
     # remove default nginx configurations
     rm -Rf /etc/nginx/conf.d/* && \
     rm -Rf /etc/nginx/sites-available/default && \
     mkdir -p /etc/nginx/ssl/ && \
     # create workdir directory
-    mkdir -p /var/www
+    mkdir -p /var/www/html
 
 COPY default.conf /etc/nginx/sites-available/default.conf
 # Supervisor Config
@@ -108,7 +120,7 @@ COPY supervisord.conf /etc/supervisord.conf
 # Start Supervisord
 COPY ./cmd.sh /
 # mount www directory as a workdir
-COPY ./www/html /var/www/html
+COPY . /var/www/html
 
 RUN rm -f /etc/nginx/sites-enabled/default && \
     ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default && \
