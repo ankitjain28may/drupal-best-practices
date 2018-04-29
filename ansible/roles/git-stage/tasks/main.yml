@@ -1,8 +1,8 @@
 ---
 
-- name: Clone Github Stage branch 'branch name - develop'
+- name: Clone Github Stage branch branch name - "{{staging_branch}}"
   git:
-    repo: https://github.com/ankitjain28may/drupal-best-practices.git
+    repo: "{{github_repo}}"
     dest: /var/www/html
-    version: develop
+    version: "{{staging_branch}}"
     accept_hostkey: yes
