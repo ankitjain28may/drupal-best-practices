@@ -13,7 +13,7 @@
     chdir: /var/www/html
 
 - name: Delete previous images
-  command: docker rm drupal drupal-mysql -f
+  command: docker rm drupal drupalmysql -f
 
 
 - name: Run the docker composer
@@ -21,3 +21,7 @@
   args:
     chdir: /var/www/html
 
+- name: Install Composer
+  command: docker exec -it drupal composer install
+  args:
+    chdir: /var/www/html
