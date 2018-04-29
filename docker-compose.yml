@@ -17,7 +17,7 @@ services:
           - nginxphp
         restart: always
     database:
-        image: "mysql"
+        image: "mariadb"
         container_name: drupalmysql
         ports:
           - "3306:3306"
