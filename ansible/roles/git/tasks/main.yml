@@ -13,6 +13,6 @@
     chdir: /var/www/html
 
 - name: Run the docker composer
-  command: docker-compose up -d
+  command: docker-compose up -d --build
   args:
     chdir: /var/www/html

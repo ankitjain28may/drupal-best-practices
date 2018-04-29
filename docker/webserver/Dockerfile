@@ -76,7 +76,7 @@ RUN apt-get install -y php7.2-fpm \
 
 RUN pecl install mcrypt-1.0.1
 
-RUN apt-get install mysql-server
+RUN apt-get install -y mysql-server
 
 # Cleanup
 RUN apt-get remove --purge -y software-properties-common \
@@ -136,3 +136,7 @@ RUN rm -f /etc/nginx/sites-enabled/default && \
 EXPOSE 80 3306 22
 
 ENTRYPOINT ["/bin/bash", "/cmd.sh"]
+
+WORKDIR /var/www/html
+
+RUN composer install
