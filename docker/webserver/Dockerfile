@@ -34,13 +34,18 @@ RUN apt-get update && apt-get upgrade -y && \
         ssmtp \
         cron
 
+# Install mcrypt
+RUN apt-get install php-pecl \
+    && apt-get install libmcrypt-dev libreadline-dev \
+    && pecl install mcrypt-1.0.1
+
+
     # Install PHP
 RUN apt-get install -y php7.2-fpm \
         php7.2-mysql \
         php7.2-curl \
         php7.2-gd \
         php7.2-intl \
-        php7.2-mcrypt \
         php-memcache \
         php7.2-sqlite \
         php7.2-tidy \
