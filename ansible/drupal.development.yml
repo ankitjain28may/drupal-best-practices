@@ -1,10 +1,9 @@
 ---
 
 - name: Development to "remote" host
-  hosts: docker
+  hosts: develop
   become: true
   roles:
-    - docker-install
     - git-pull
     - env
     - restart

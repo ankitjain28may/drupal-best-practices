@@ -1,7 +1,20 @@
 ---
 
+- name: stat vendor
+  stat: path=/var/www/backup/vendor
+  register: vendor_stat
+
+- name: Copy previous vendor
+  command: cp -r backup/vendor html/vendor
+  when: vendor_stat.stat.exists
+  args:
+    chdir: /var/www
+
+
 - name: Install Composer without dependencies
   command: docker exec drupal composer install --no-dev
+  async: 1000
+  poll: 10
   args:
     chdir: /var/www/html
 

@@ -9,33 +9,31 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
     ln -sf /bin/true /sbin/initctl && \
     mkdir /var/run/sshd && \
     mkdir /run/php && \
-
     apt-get update && \
     apt-get install -y --no-install-recommends apt-utils \
-        software-properties-common \
-        python-software-properties \
-        language-pack-en-base && \
-
+    software-properties-common \
+    python-software-properties \
+    language-pack-en-base && \
     LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 
+# Install and Update
 RUN apt-get update && apt-get upgrade -y && \
 
     apt-get install -y python-setuptools \
-        curl \
-        git \
-        nano \
-        sudo \
-        unzip \
-        openssh-server \
-        openssl \
-        supervisor \
-        nginx \
-        memcached \
-        ssmtp \
-        cron
+    curl \
+    git \
+    nano \
+    sudo \
+    unzip \
+    openssh-server \
+    openssl \
+    supervisor \
+    nginx \
+    memcached \
+    ssmtp \
+    cron
 
-# Install mcrypt
-# Install mcrypt
+# Install pear
 RUN apt-get install -y php-pear \
     && apt-get install -y libmcrypt-dev libreadline-dev \
     libfreetype6-dev \
@@ -49,31 +47,32 @@ RUN apt-get install -y php-pear \
     gcc make autoconf libc-dev pkg-config
 
 
-    # Install PHP
+# Install PHP
 RUN apt-get install -y php7.2-fpm \
-        php7.2-mysql \
-        php7.2-curl \
-        php7.2-gd \
-        php7.2-intl \
-        php-memcache \
-        php7.2-sqlite \
-        php7.2-tidy \
-        php7.2-xmlrpc \
-        php7.2-pgsql \
-        php7.2-ldap \
-        freetds-common \
-        php7.2-pgsql \
-        php7.2-sqlite3 \
-        php7.2-json \
-        php7.2-xml \
-        php7.2-mbstring \
-        php7.2-soap \
-        php7.2-zip \
-        php7.2-cli \
-        php7.2-sybase \
-        php7.2-odbc \
-        php7.2-dev
+    php7.2-mysql \
+    php7.2-curl \
+    php7.2-gd \
+    php7.2-intl \
+    php-memcache \
+    php7.2-sqlite \
+    php7.2-tidy \
+    php7.2-xmlrpc \
+    php7.2-pgsql \
+    php7.2-ldap \
+    freetds-common \
+    php7.2-pgsql \
+    php7.2-sqlite3 \
+    php7.2-json \
+    php7.2-xml \
+    php7.2-mbstring \
+    php7.2-soap \
+    php7.2-zip \
+    php7.2-cli \
+    php7.2-sybase \
+    php7.2-odbc \
+    php7.2-dev
 
+# Install mcrypt
 RUN pecl install mcrypt-1.0.1
 
 # Cleanup
@@ -114,11 +113,11 @@ RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf &
     # create workdir directory
     mkdir -p /var/www/html
 
-COPY default.conf /etc/nginx/sites-available/default.conf
+COPY ./nginx/default.conf /etc/nginx/sites-available/default.conf
 # Supervisor Config
-COPY supervisord.conf /etc/supervisord.conf
+COPY ./supervisord/supervisord.conf /etc/supervisord.conf
 # Start Supervisord
-COPY ./cmd.sh /
+COPY ./cmd/cmd.sh /
 # mount www directory as a workdir
 COPY . /var/www/html
 

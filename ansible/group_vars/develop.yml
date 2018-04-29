@@ -3,10 +3,3 @@
 #// user account used to ssh the hosts
 remote_user: ubuntu
 docker_group: docker
-
-#// non-sudo user to be created for running process
-# action_user: tedcheng
-
-#// password for the non-sudo user, actually we can have better way to not storing the password in code, but this is for simplifying the tutorial.
-
-# action_user_pw: __complicatedPW__

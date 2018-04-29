@@ -1,0 +1,10 @@
+---
+
+- name: Restore backup to "remote" host
+  hosts: docker
+  become: true
+  roles:
+    - restore
+    - docker-build
+    - composer-prod
+    - drupal

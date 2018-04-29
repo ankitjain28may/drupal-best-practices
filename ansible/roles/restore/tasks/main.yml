@@ -1,0 +1,24 @@
+---
+
+- name: stat backup
+  stat: path=/var/www/backup
+  register: backup_stat
+
+- name: Move html to backup-old
+  command: mv html backup-old
+  when: backup_stat.stat.exists
+  args:
+    chdir: /var/www
+
+- name: Move backup to html
+  command: mv backup html
+  when: backup_stat.stat.exists
+  args:
+    chdir: /var/www
+
+- name: Move backup-old to backup
+  command: mv backup-old backup
+  when: backup_stat.stat.exists
+  args:
+    chdir: /var/www
+

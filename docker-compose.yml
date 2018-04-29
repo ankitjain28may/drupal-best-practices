@@ -1,38 +1,36 @@
 version: '2'
 services:
-    drupal:
-        build:
-          context: ./docker/webserver
-          dockerfile: Dockerfile
-        image: php-server
-        container_name: drupal
-        ports:
-          - "80:80"
-          - "8028:22"
-        volumes:
-          - .:/var/www/html
-        links:
-          - "drupalmysql:mysql"
-        networks:
-          - nginxphp
-        restart: always
-    drupalmysql:
-        image: "mariadb"
-        container_name: drupalmysql
-        environment:
-          MYSQL_DATABASE: drupal
-          MYSQL_USER: user
-          MYSQL_PASSWORD: secret
-          MYSQL_ROOT_PASSWORD: secret
-        volumes:
-          - ./db-dump:/docker-entrypoint-initdb.d
-        networks:
-          - nginxphp
-        restart: always
+  drupal:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    image: php-nginx-composer
+    container_name: drupal
+    ports:
+      - "80:80"
+      - "8028:22"
+    volumes:
+      - .:/var/www/html
+    links:
+      - "drupaldb:mysql"
+    networks:
+      - drupal
+    restart: always
+  drupaldb:
+    image: "mariadb"
+    container_name: drupaldb
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - ./db-dump:/docker-entrypoint-initdb.d
+    networks:
+      - drupal
+    restart: always
 
 volumes:
   db:
 networks:
-  nginxphp:
+  drupal:
 
 

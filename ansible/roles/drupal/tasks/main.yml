@@ -1,6 +1,6 @@
 ---
 
-- name: Import Config
+- name: Import Configuration
   command: docker exec drupal composer drupal ci
   args:
     chdir: /var/www/html
