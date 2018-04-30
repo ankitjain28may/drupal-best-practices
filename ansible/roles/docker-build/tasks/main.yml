@@ -5,7 +5,7 @@
   ignore_errors: yes
 
 - name: Run the docker compose
-  command: docker-compose up -d --build
+  command: docker-compose up -d
   async: 1000
   poll: 10
   args:

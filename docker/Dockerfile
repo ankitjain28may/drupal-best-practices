@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Ankit Jain
+MAINTAINER Ankit Jain <ankitjain28may77@gmail.com>
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEN noninteractive

@@ -1,10 +1,7 @@
 version: '2'
 services:
   drupal:
-    build:
-      context: ./docker
-      dockerfile: Dockerfile
-    image: php-nginx-composer
+    image: "php-nginx-composer:latest"
     container_name: drupal
     ports:
       - "80:80"
@@ -20,8 +17,8 @@ services:
     image: "mariadb"
     container_name: drupaldb
     environment:
-      MYSQL_DATABASE: drupal
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_PASSWORD}'
     volumes:
       - ./db-dump:/var/www/html/db-dump
       - ./db-dump:/docker-entrypoint-initdb.d

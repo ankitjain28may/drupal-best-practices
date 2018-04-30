@@ -1,5 +1,14 @@
 ---
 
+- name: stat backup
+  stat: path=/var/www/backup
+  register: backup_stat
+
+- name: Delete previous backup
+  command: rm -r backup
+  when: backup_stat.stat.exists
+  args:
+    chdir: /var/www
 
 - name: stat html
   stat: path=/var/www/html
