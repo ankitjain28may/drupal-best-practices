@@ -23,6 +23,7 @@ services:
       MYSQL_DATABASE: drupal
       MYSQL_ROOT_PASSWORD: secret
     volumes:
+      - ./db-dump:/var/www/html/db-dump
       - ./db-dump:/docker-entrypoint-initdb.d
     networks:
       - drupal
