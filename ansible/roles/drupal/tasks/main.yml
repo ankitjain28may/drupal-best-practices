@@ -3,9 +3,9 @@
 - name: Import Configuration
   command: docker exec drupal composer drupal ci
   args:
-    chdir: /var/www/html
+    chdir: "{{project_dir}}/{{project_folder_name}}"
 
 - name: Rebuild Cache
   command: docker exec drupal composer drupal cr
   args:
-    chdir: /var/www/html
+    chdir: "{{project_dir}}/{{project_folder_name}}"

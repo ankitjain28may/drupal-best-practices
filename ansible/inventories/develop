@@ -1,6 +1,9 @@
 [digitalocean]
 139.59.18.27 ansible_user=root
 
+[localhost]
+localhots
+
 
 [develop:children]
 digitalocean

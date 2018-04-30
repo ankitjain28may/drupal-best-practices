@@ -142,6 +142,10 @@ It depends on **drupaldb** container for database.
     github_repo: 'https://github.com/ankitjain28may/drupal-best-practices.git'
     staging_branch: 'develop'
     env_file: 'ansible'
+    backup_dir: '/var/www'
+    project_dir: '/var/www'
+    project_folder_name: 'html'
+    backup_folder_name: 'backup'
 
   ```
 ## One Click Installation
@@ -151,6 +155,16 @@ It depends on **drupaldb** container for database.
   ```
 
   will deploy your drupal site on all the hosts.
+
+## Install Drupal on Localhost (Locally)
+
+1. Add localhost group to hosts in `drupal.*.yml` under `ansible` dir and set group_vars for the localhost in `localhost.yml` file.
+
+2. Run this command -
+
+  ```shell
+    ansible-playbook ansible/drupal.production.yml --connection=local --extra-vars "ansible_sudo_pass=<local-system-password>"
+  ```
 
 > All the dependencies are managed using Composer.
 

@@ -1,24 +1,23 @@
 ---
 
 - name: stat backup
-  stat: path=/var/www/backup
+  stat:
+    path: "{{backup_dir}}/{{backup_folder_name}}"
   register: backup_stat
 
 - name: Move html to backup-old
-  command: mv html backup-old
+  command: mv {{project_dir}}/{{project_folder_name}}
+    {{backup_dir}}/{{backup_folder_name}}-old
   when: backup_stat.stat.exists
-  args:
-    chdir: /var/www
 
 - name: Move backup to html
-  command: mv backup html
+  command: mv {{backup_dir}}/{{backup_folder_name}}
+    {{project_dir}}/{{project_folder_name}}
   when: backup_stat.stat.exists
-  args:
-    chdir: /var/www
 
 - name: Move backup-old to backup
-  command: mv backup-old backup
+  command: mv {{backup_dir}}/{{backup_folder_name}}-old
+    {{backup_dir}}/{{backup_folder_name}}
   when: backup_stat.stat.exists
-  args:
-    chdir: /var/www
+
 
