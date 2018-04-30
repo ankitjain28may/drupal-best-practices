@@ -1,9 +1,0 @@
-uuid: 70201802-6896-4df8-8d0c-722347551b1b
-langcode: en
-status: true
-dependencies: {  }
-name: Category
-vid: category
-description: ''
-hierarchy: 0
-weight: 0

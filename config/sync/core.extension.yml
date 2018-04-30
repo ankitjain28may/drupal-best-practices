@@ -5,7 +5,6 @@ module:
   block_content: 0
   breakpoint: 0
   ckeditor: 0
-  codesnippet: 0
   color: 0
   comment: 0
   config: 0
@@ -13,12 +12,8 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
-  devel: 0
-  devel_generate: 0
-  disqus: 0
   dynamic_page_cache: 0
   editor: 0
-  exclude_node_title: 0
   field: 0
   field_ui: 0
   file: 0
@@ -26,20 +21,15 @@ module:
   help: 0
   history: 0
   image: 0
-  kint: 0
-  libraries: 0
   link: 0
-  medium: 0
   menu_ui: 0
   node: 0
   options: 0
   page_cache: 0
-  page_load_progress: 0
   path: 0
   quickedit: 0
   rdf: 0
   search: 0
-  sharethis: 0
   shortcut: 0
   system: 0
   taxonomy: 0
@@ -48,7 +38,6 @@ module:
   tour: 0
   update: 0
   user: 0
-  views_infinite_scroll: 0
   views_ui: 0
   menu_link_content: 1
   views: 10
@@ -58,8 +47,6 @@ theme:
   classy: 0
   bartik: 0
   seven: 0
-  classic_blog: 0
-  d8_mediumish_blog: 0
   mediumish_blog: 0
 profile: standard
 _core:

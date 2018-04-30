@@ -1,14 +1,5 @@
 ---
 
-- name: stat backup
-  stat: path=/var/www/backup
-  register: backup_stat
-
-- name: Move backup to backup-timestamp
-  command: mv html backup-{{ansible_date_time.date}}
-  when: backup_stat.stat.exists
-  args:
-    chdir: /var/www
 
 - name: stat html
   stat: path=/var/www/html
