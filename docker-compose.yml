@@ -1,7 +1,7 @@
 version: '2'
 services:
   drupal:
-    image: "php-nginx-composer:latest"
+    image: "ankitjain28/php-nginx-composer:latest"
     container_name: drupal
     ports:
       - "80:80"

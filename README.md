@@ -104,19 +104,19 @@ Docker is a tool designed to make it easier to create, deploy, and run applicati
 
 2. [Ubuntu](https://hub.docker.com/_/ubuntu/) V16.04 image from [Docker hub](https://hub.docker.com) for generating image using Dockerfile.
 
-3. [php-nginx-composer](https://hub.docker.com/r/ankitjain28/php-nginx-composer/) install nginx, php7.2 with its extensions and composer. This image is maintained by me under Github Repo [php-nginx-composer](https://github.com/ankitjain28may/php-nginx-composer)
+3. [ankitjain28/php-nginx-composer](https://hub.docker.com/r/ankitjain28/php-nginx-composer/) install nginx, php7.2 with its extensions and composer. This image is maintained by me under Github Repo [php-nginx-composer](https://github.com/ankitjain28may/php-nginx-composer)
 
 ### Docker Compose
 
 Compose is a tool for defining and running multi-container Docker applications.
 
-We have defined `docker-compose.yml` file to create Containers from `php-nginx-composer` and `mariadb` images.
+We have defined `docker-compose.yml` file to create Containers from `ankitjain28/php-nginx-composer` and `mariadb` images.
 
 **docker-compose.yml** contains two services -
 
 1. **drupaldb** : It will create container name `drupaldb` using `mariadb` image and import the dump in the `db-dump` to the database. Set env variable in `.env` file.
 
-2. **drupal** : It will create container name `drupal` using `php-nginx-composer` image and mount `/var/www/html` directory to `/var/www/html` in container and application runs on port `80`.
+2. **drupal** : It will create container name `drupal` using `ankitjain28/php-nginx-composer` image and mount `/var/www/html` directory to `/var/www/html` in container and application runs on port `80`.
 
 It depends on **drupaldb** container.
 
