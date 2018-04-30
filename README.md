@@ -125,11 +125,11 @@ It depends on **drupaldb** container for database.
   ```
  will create two containers and you can anytime start and stop your container using-
 
-   ```
+  ```
     docker-compose stop <container-name>
   ```
 
-    ```
+  ```
     docker-compose start <container-name>
   ```
 
