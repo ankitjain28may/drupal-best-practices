@@ -1,7 +1,7 @@
 ---
 
 - name: Staging to "remote" host
-  hosts: docker
+  hosts: develop
   become: true
   roles:
     - backup

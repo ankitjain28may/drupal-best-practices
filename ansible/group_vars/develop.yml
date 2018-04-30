@@ -5,3 +5,4 @@ remote_user: ubuntu
 docker_group: docker
 github_repo: 'https://github.com/ankitjain28may/drupal-best-practices.git'
 staging_branch: 'develop'
+env_file: 'ansible'

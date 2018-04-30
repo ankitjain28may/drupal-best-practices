@@ -1,7 +1,7 @@
 ---
 
 - name: Restore backup to "remote" host
-  hosts: docker
+  hosts: develop
   become: true
   roles:
     - restore

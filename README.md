@@ -118,6 +118,52 @@ We have defined `docker-compose.yml` file to create Containers from `ankitjain28
 
 2. **drupal** : It will create container name `drupal` using `ankitjain28/php-nginx-composer` image and mount `/var/www/html` directory to `/var/www/html` in container and application runs on port `80`.
 
-It depends on **drupaldb** container.
+It depends on **drupaldb** container for database.
+
+  ```
+    docker-compose up -d
+  ```
+ will create two containers and you can anytime start and stop your container using-
+
+   ```
+    docker-compose stop <container-name>
+  ```
+
+    ```
+    docker-compose start <container-name>
+  ```
+
+> Add your configuration under group_vars directory for your defined groups to manage multiple sites on multiple servers.
+
+  ```yml
+
+    remote_user: ubuntu
+    docker_group: docker
+    github_repo: 'https://github.com/ankitjain28may/drupal-best-practices.git'
+    staging_branch: 'develop'
+    env_file: 'ansible'
+
+  ```
+## One Click Installation
+
+  ```shell
+    ansible-playbook ansible/drupal.production.yml
+  ```
+
+  will deploy your drupal site on all the hosts.
+
+> All the dependencies are managed using Composer.
+
+For more information about managing dependencies and sync configuration, Read here -
+
+ - [The best way to manage your Drupal workflow](http://ankitjain28.me/best-way-managing-drupal-workflow)
+
+## Contribute :
+
+  If you are interested in contributing to this project, Open Issues, send PR and Don't forget to star the repo.
+
+    Feel free to code and contribute
+
+**Note** :  Make new branch for each PR.
 
 
