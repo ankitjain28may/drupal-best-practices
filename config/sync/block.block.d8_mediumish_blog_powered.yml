@@ -1,0 +1,22 @@
+uuid: 4d9398fe-01a0-4f5e-a8d3-6359e947eae4
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - d8_mediumish_blog
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: d8_mediumish_blog_powered
+theme: d8_mediumish_blog
+region: footer
+weight: -7
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

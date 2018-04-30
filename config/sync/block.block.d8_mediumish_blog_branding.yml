@@ -1,0 +1,25 @@
+uuid: 8894024e-5161-498d-9a23-63568eacb2b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - d8_mediumish_blog
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: d8_mediumish_blog_branding
+theme: d8_mediumish_blog
+region: navigation
+weight: -6
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

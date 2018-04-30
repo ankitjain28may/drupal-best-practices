@@ -1,0 +1,13 @@
+slideshow_display: '1'
+slide_title_1: 'Title 1'
+slide_title_2: 'Title 2'
+slide_title_3: 'Title 3'
+slide_title_4: 'Title 4'
+slide_title_5: 'Title 5'
+slide_url_1: /node
+slide_url_2: /node
+slide_url_3: /node
+slide_url_4: /node
+slide_url_5: /node
+_core:
+  default_config_hash: sgTAjq9g4yDm8At86lEfVeZ0Hle8pzghgwnsfgbmNfE

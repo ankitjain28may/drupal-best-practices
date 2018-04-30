@@ -1,4 +1,4 @@
-uuid: 9bf7339d-4f5b-4243-9667-b4e79112c24f
+uuid: d7dca01f-b633-4663-99af-5d80381e5b0f
 langcode: en
 status: true
 dependencies:
@@ -12,8 +12,8 @@ _core:
   default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
 id: mediumish_blog_footer
 theme: mediumish_blog
-region: navigation
-weight: 0
+region: footer
+weight: -8
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

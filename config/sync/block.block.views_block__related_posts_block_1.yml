@@ -1,0 +1,25 @@
+uuid: 470d2c71-db7d-494d-8d07-cb05f6db932d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.related_posts
+  module:
+    - views
+  theme:
+    - mediumish_blog
+id: views_block__related_posts_block_1
+theme: mediumish_blog
+region: related_posts
+weight: 0
+provider: null
+plugin: 'views_block:related_posts-block_1'
+settings:
+  id: 'views_block:related_posts-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: 79fd8295-6a46-4eb7-be99-7ca84440ff55
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tags
+  module:
+    - text
+id: taxonomy_term.tags.default
+targetEntityType: taxonomy_term
+bundle: tags
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_trimmed
+    weight: 0
+    region: content
+    settings:
+      trim_length: 100
+    third_party_settings: {  }
+hidden: {  }

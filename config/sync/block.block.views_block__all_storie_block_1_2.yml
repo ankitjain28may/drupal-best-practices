@@ -1,0 +1,24 @@
+uuid: 9b286c0a-d22f-4882-b986-9d74b372dccd
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_storie
+  module:
+    - views
+  theme:
+    - mediumish_blog
+id: views_block__all_storie_block_1_2
+theme: mediumish_blog
+region: recent_posts
+weight: 0
+provider: null
+plugin: 'views_block:all_storie-block_1'
+settings:
+  id: 'views_block:all_storie-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

@@ -1,0 +1,7 @@
+page_load_progress_time: 10
+page_load_progress_elements: .page-load-progress-submit
+page_load_progress_request_path: '/*'
+page_load_progress_request_path_negate_condition: false
+page_load_progress_esc_key: true
+_core:
+  default_config_hash: Buh_qPTFvf_CDCWTIltbk0qfZ6TvlCxh3TV8q04vDvU

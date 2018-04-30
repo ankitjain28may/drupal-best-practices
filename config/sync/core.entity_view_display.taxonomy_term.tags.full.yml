@@ -1,0 +1,23 @@
+uuid: 73930ff3-e965-482a-a2eb-aa38e687ff28
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.full
+    - taxonomy.vocabulary.tags
+  module:
+    - text
+id: taxonomy_term.tags.full
+targetEntityType: taxonomy_term
+bundle: tags
+mode: full
+content:
+  description:
+    label: hidden
+    type: text_trimmed
+    weight: 0
+    region: content
+    settings:
+      trim_length: 100
+    third_party_settings: {  }
+hidden: {  }

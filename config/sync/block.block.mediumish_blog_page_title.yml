@@ -1,4 +1,4 @@
-uuid: d1c150dc-b05a-48ec-b379-35232124d8a6
+uuid: 1ba99001-e5c3-446d-be39-c9d0126c4a6a
 langcode: en
 status: true
 dependencies:
@@ -9,7 +9,7 @@ _core:
 id: mediumish_blog_page_title
 theme: mediumish_blog
 region: content
-weight: -50
+weight: -8
 provider: null
 plugin: page_title_block
 settings:

@@ -1,4 +1,4 @@
-uuid: 0b2f2ca2-9725-4575-9028-4f4929f51dd2
+uuid: 9888e019-db68-432b-848c-154df4e89879
 langcode: en
 status: true
 dependencies: {  }
@@ -13,7 +13,10 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'administer sharethis'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'
+  - 'use exclude node title'
   - 'use text format basic_html'
+  - 'view disqus comments'
