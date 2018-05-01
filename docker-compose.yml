@@ -16,8 +16,6 @@ services:
   drupaldb:
     image: "mariadb"
     container_name: drupaldb
-    ports:
-      - "${MYSQL_PORT}:3306"
     environment:
       MYSQL_DATABASE: '${MYSQL_DATABASE}'
       MYSQL_ROOT_PASSWORD: '${MYSQL_PASSWORD}'
