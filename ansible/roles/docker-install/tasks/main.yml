@@ -1,3 +1,5 @@
+---
+
 # sudo apt-get install *
 - name: Installing docker packages
   apt:
@@ -71,10 +73,10 @@
   tags:
     - docker
 
-# sudo apt-get install docker-compose=1.8.*
+# sudo apt-get install docker-compose
 - name: Installing docker-compose
   apt:
-    name: docker-compose=1.8.*
+    name: docker-compose
     state: present
     update_cache: yes
   tags:
