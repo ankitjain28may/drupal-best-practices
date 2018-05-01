@@ -2,7 +2,7 @@
 139.59.18.27 ansible_user=root
 
 [localhost]
-localhots
+localhost
 
 
 [develop:children]
