@@ -1,6 +1,6 @@
 ---
 
-- name: Clone Github repo
+- name: Cloning Github repo (branch - master) in {{project_dir}}/{{project_folder_name}} dir
   git:
     repo: "{{github_repo}}"
     dest: "{{project_dir}}/{{project_folder_name}}"

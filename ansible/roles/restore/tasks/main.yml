@@ -1,21 +1,21 @@
 ---
 
-- name: stat backup
+- name: Checking for backup - {{backup_dir}}/{{backup_folder_name}}
   stat:
     path: "{{backup_dir}}/{{backup_folder_name}}"
   register: backup_stat
 
-- name: Move html to backup-old
+- name: Moving {{project_dir}}/{{project_folder_name}} to {{backup_dir}}/{{backup_folder_name}}-old
   command: mv {{project_dir}}/{{project_folder_name}}
     {{backup_dir}}/{{backup_folder_name}}-old
   when: backup_stat.stat.exists
 
-- name: Move backup to html
+- name: Moving {{backup_dir}}/{{backup_folder_name}} to {{project_dir}}/{{project_folder_name}}
   command: mv {{backup_dir}}/{{backup_folder_name}}
     {{project_dir}}/{{project_folder_name}}
   when: backup_stat.stat.exists
 
-- name: Move backup-old to backup
+- name: Moving {{backup_dir}}/{{backup_folder_name}}-old to {{backup_dir}}/{{backup_folder_name}}
   command: mv {{backup_dir}}/{{backup_folder_name}}-old
     {{backup_dir}}/{{backup_folder_name}}
   when: backup_stat.stat.exists

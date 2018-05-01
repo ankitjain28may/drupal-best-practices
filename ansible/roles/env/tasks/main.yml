@@ -1,6 +1,6 @@
 ---
 
-- name: Copy .env file
+- name: Copying .env."{{env_file}}" to .env file
   command: cp .env."{{env_file}}" .env
   args:
     chdir: "{{project_dir}}/{{project_folder_name}}"

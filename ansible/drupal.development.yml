@@ -1,7 +1,7 @@
 ---
 
 - name: Development to "remote" host
-  hosts: localhost
+  hosts: develop
   become: true
   roles:
     - git-pull

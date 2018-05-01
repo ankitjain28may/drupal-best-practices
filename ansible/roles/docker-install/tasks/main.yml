@@ -1,5 +1,5 @@
 # sudo apt-get install *
-- name: Install docker packages
+- name: Installing docker packages
   apt:
     name: "{{ item }}"
     state: present
@@ -21,7 +21,7 @@
     - docker
 
 # sudo apt-key fingerprint 0EBFCD88
-- name: Verify that we have the key with the fingerprint
+- name: Verifing that we have the key with the fingerprint
   apt_key:
     id: 0EBFCD88
     state: present
@@ -29,7 +29,7 @@
     - docker
 
 # sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
-- name: Set up the stable repository
+- name: Setting up the stable repository
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
     state: present
@@ -38,14 +38,14 @@
     - docker
 
 # sudo apt-get update
-- name: Update apt packages
+- name: Updating apt packages
   apt:
     update_cache: yes
   tags:
     - docker
 
 # sudo apt-get install docker-ce=18.03.*
-- name: Install docker
+- name: Installing docker
   apt:
     name: docker-ce=18.03.*
     state: present
@@ -55,7 +55,7 @@
     - docker
 
 # sudo groupadd docker
-- name: Create "docker" group
+- name: Creating "docker" group
   group:
     name: "{{ docker_group }}"
     state: present
@@ -63,7 +63,7 @@
     - docker
 
 # sudo usermod -aG docker ubuntu
-- name: Add remote "ubuntu" user to "docker" group
+- name: Adding remote "ubuntu" user to "docker" group
   user:
     name: "{{ remote_user }}"
     group: "{{ docker_group }}"
@@ -72,7 +72,7 @@
     - docker
 
 # sudo apt-get install docker-compose=1.8.*
-- name: Install docker-compose
+- name: Installing docker-compose
   apt:
     name: docker-compose=1.8.*
     state: present

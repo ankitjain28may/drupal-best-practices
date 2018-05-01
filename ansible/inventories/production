@@ -6,4 +6,4 @@ ip ansible_user=ubuntu
 
 [production:children]
 digitalocean
-digitalocean
+aws

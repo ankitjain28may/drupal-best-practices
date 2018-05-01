@@ -1,27 +1,27 @@
 ---
 
-- name: stat backup
+- name: Checking for backup - {{backup_dir}}/{{backup_folder_name}}
   stat:
     path: "{{backup_dir}}/{{backup_folder_name}}"
   register: backup_stat
 
-- name: Delete previous backup
+- name: Deleting previous backup - {{backup_dir}}/{{backup_folder_name}}
   command: rm -r "{{backup_folder_name}}"
   when: backup_stat.stat.exists
   args:
     chdir: "{{backup_dir}}"
 
-- name: stat html
+- name: Checking for project - {{project_dir}}/{{project_folder_name}}
   stat:
     path: "{{project_dir}}/{{project_folder_name}}"
   register: html_stat
 
-- name: Move html to backup
+- name: Moving {{project_folder_name}} to {{backup_folder_name}}
   command: mv {{project_dir}}/{{project_folder_name}}
     {{backup_dir}}/{{backup_folder_name}}
   when: html_stat.stat.exists
 
-- name: Create html dir
+- name: Creating {{project_dir}}/{{project_folder_name}} folder
   command: mkdir {{project_folder_name}}
   args:
     chdir: "{{project_dir}}"

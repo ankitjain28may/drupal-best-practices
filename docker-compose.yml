@@ -4,8 +4,10 @@ services:
     image: "ankitjain28/php-nginx-composer:latest"
     container_name: drupal
     ports:
-      - "${PORT}:80"
+      - "${APP_PORT}:80"
       - "8028:22"
+    environment:
+      APP_PORT: '${APP_PORT}'
     volumes:
       - .:/var/www/html
     links:
@@ -16,9 +18,12 @@ services:
   drupaldb:
     image: "mariadb"
     container_name: drupaldb
+    ports:
+      - "${MYSQL_PORT}:3306"
     environment:
       MYSQL_DATABASE: '${MYSQL_DATABASE}'
       MYSQL_ROOT_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_PORT: "${MYSQL_PORT}"
     volumes:
       - ./db-dump:/var/www/html/db-dump
       - ./db-dump:/docker-entrypoint-initdb.d

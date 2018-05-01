@@ -1,15 +1,15 @@
 ---
 
-- name: stat vendor
+- name: Checking vendor folder in {{backup_dir}}/{{backup_folder_name}}/
   stat: path={{backup_dir}}/{{backup_folder_name}}/vendor
   register: vendor_stat
 
-- name: Copy previous vendor
+- name: Copying previous vendor folder
   command: cp -r {{backup_dir}}/{{backup_folder_name}}/vendor
     {{project_dir}}/{{project_folder_name}}/vendor
   when: vendor_stat.stat.exists
 
-- name: Install Composer with dependencies
+- name: Installing Composer with dependencies
   command: docker exec drupal composer install
   async: 1000
   poll: 10
