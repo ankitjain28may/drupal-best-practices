@@ -23,16 +23,33 @@ MYSQL_DATABASE=${MYSQL_DATABASE#*=}
 DB_PATH=$(grep DB_PATH .env | xargs)
 DB_PATH=${DB_PATH#*=}
 
+SAVE_PREVIOUS_DB_DUMP=$(grep SAVE_PREVIOUS_DB_DUMP .env | xargs)
+SAVE_PREVIOUS_DB_DUMP=${SAVE_PREVIOUS_DB_DUMP#*=}
+
+EXPORT_CONFIG_ON_COMMIT=$(grep EXPORT_CONFIG_ON_COMMIT .env | xargs)
+EXPORT_CONFIG_ON_COMMIT=${EXPORT_CONFIG_ON_COMMIT#*=}
+
+EXPORT_DB_DUMP_ON_COMMIT=$(grep EXPORT_DB_DUMP_ON_COMMIT .env | xargs)
+EXPORT_DB_DUMP_ON_COMMIT=${EXPORT_DB_DUMP_ON_COMMIT#*=}
+
 CURRENT_DATE_TIME="`date +%Y-%m-%d-%H-%M-%S`"
 NEW_FILE="${DB_PATH%*.sql}"-$CURRENT_DATE_TIME.sql
 
 
 # Export the Configuration
-echo "Exporting the Configuration"
-docker exec drupal composer drupal config:export
+if [ $EXPORT_CONFIG_ON_COMMIT = 'YES' ]; then
+    echo "Exporting the Configuration"
+    docker exec drupal composer drupal config:export
+fi
+
+# Save previous dump
+if [ $SAVE_PREVIOUS_DB_DUMP = 'YES' ]; then
+    echo "Saving Previous Dump as "$NEW_FILE
+    mv $DB_PATH $NEW_FILE
+fi
 
 # Export the Database dump
-mv $DB_PATH $NEW_FILE
-echo "Exporting Database Dump"
-docker exec drupaldb mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE  > $DB_PATH
-
+if [ $EXPORT_DB_DUMP_ON_COMMIT = 'YES' ]; then
+    echo "Exporting Database Dump"
+    docker exec drupaldb mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE  > $DB_PATH
+fi
