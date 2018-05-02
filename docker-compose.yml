@@ -18,12 +18,12 @@ services:
   drupaldb:
     image: "mariadb"
     container_name: drupaldb
+    volumes:
+      - ${DB_PATH}:/docker-entrypoint-initdb.d/dump.sql
     environment:
       MYSQL_DATABASE: '${MYSQL_DATABASE}'
       MYSQL_ROOT_PASSWORD: '${MYSQL_PASSWORD}'
-    volumes:
-      - ./db-dump:/var/www/html/db-dump
-      - ./db-dump:/docker-entrypoint-initdb.d
+      DB_PATH: '${DB_PATH}'
     networks:
       - drupal
     restart: always
