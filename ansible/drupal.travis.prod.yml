@@ -4,5 +4,5 @@
   hosts: travis
   become: true
   roles:
-    - composer-prod
+    - composer
     - drupal
