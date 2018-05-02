@@ -1,12 +1,13 @@
-language: php
+language: python
 dist: trusty
 sudo: required
 
 services:
   - docker
 
-php:
-  - 7.2
+python: 2.7
+# php:
+  # - 7.2
 
 # env:
 #   global:
@@ -21,7 +22,8 @@ env:
 
 before_install:
   - cp .env.travis .env
-  - sudo apt-get update
+  - sudo apt-get update -qq
+  - pip install ansible
 
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
@@ -30,6 +32,7 @@ before_install:
 
 install:
   - docker-compose up -d
+  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local
 
 # script:
 #   - if [[ $RELEASE = dev ]]; then composer --verbose remove --no-update drupal/console; fi;

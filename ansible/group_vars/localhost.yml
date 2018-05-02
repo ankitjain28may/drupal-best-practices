@@ -5,8 +5,8 @@ remote_user: ubuntu
 docker_group: docker
 github_repo: 'https://github.com/ankitjain28may/drupal-best-practices.git'
 staging_branch: 'develop'
-env_file: 'ansible'
-backup_dir: '/var/www/docker'
-project_dir: '/var/www/docker'
-project_folder_name: 'ansible'
-backup_folder_name: 'ansible-backup'
+env_file: 'travis'
+backup_dir: '/var/www'
+project_dir: '/var/www'
+project_folder_name: 'html'
+backup_folder_name: 'backup'
