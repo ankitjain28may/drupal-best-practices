@@ -8,4 +8,4 @@
     accept_hostkey: yes
 
 - name: Adding Git Hooks on Commit
-  command: mv ./.githooks/pre-commit ./.git/hooks/pre-commit
+  command: cp {{project_dir}}/{{project_folder_name}}/.githooks/pre-commit {{project_dir}}/{{project_folder_name}}/.git/hooks/pre-commit
