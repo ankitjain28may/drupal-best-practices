@@ -12,6 +12,5 @@
 
 - name: Giving 755 permission to hooks
   file:
-    path: {{project_dir}}/{{project_folder_name}}/.git/hooks/pre-commit
+    path: "{{project_dir}}/{{project_folder_name}}/.git/hooks/pre-commit"
     mode: u=rwx,g=rwx,o=rx
-    recurse: yes
