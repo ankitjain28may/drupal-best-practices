@@ -20,6 +20,7 @@ env:
   DOCKER_COMPOSE_VERSION: 1.8.0
 
 before_install:
+  - cp .env.travis .env
   - sudo apt-get update
 
   - sudo rm /usr/local/bin/docker-compose
