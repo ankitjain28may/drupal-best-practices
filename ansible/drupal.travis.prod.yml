@@ -1,7 +1,7 @@
 ---
 
 - name: Configuration to "remote" host
-  hosts: localhost
+  hosts: travis
   become: true
   roles:
     - backup

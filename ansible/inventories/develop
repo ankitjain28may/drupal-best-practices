@@ -5,5 +5,10 @@
 localhost
 
 
+[travis]
+localhost
+
+
+
 [develop:children]
 digitalocean

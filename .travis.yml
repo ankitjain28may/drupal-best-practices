@@ -32,7 +32,7 @@ before_install:
 
 install:
   - docker-compose up -d
-  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local
+  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
 
 # script:
 #   - if [[ $RELEASE = dev ]]; then composer --verbose remove --no-update drupal/console; fi;
