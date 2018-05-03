@@ -9,29 +9,20 @@ python: 2.7
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
-  ABC: false
-  BUILD_CHECK_PHPUNIT: true
 
 before_install:
   - cp .env.travis .env
-  # - sudo apt-get update -qq
-  # - pip install ansible
+  - sudo apt-get update -qq
+  - pip install ansible
 
-  # - sudo rm /usr/local/bin/docker-compose
-  # - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  # - chmod +x docker-compose
-  # - sudo mv docker-compose /usr/local/bin
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
-  # - docker-compose up -d
-  # - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
+  - docker-compose up -d
+  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
 
 script:
-  # - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core
-  # - docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core
-  # - if [ $ABC == true ]; then cat .env; else echo "Hy"; fi;
-
-  # - if [ $BUILD_CHECK_PHPUNIT == true ]; then cat .env; else echo "rg"; fi;
-  # - cat .env
-  # - echo "Hello world"
   -   bash ./.travis/tests.sh
