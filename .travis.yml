@@ -23,7 +23,7 @@ before_install:
 install:
   - docker-compose up -d
   - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
-  - ansible-playbook ansible/drupal.production.yml
+  - ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop
 
 script:
   - docker exec -it drupal vendor/bin/phpcbf --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib
