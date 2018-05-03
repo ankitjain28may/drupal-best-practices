@@ -28,7 +28,8 @@ install:
 script:
   # - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core
   # - docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core
-  - if [ ${ABC} = YES ]; then cat .env; fi;
+  - if [ ${ABC} == YES ]; then cat .env; else; echo "Hy"; fi;
+
   - if [ ${BUILD_CHECK_PHPUNIT} = YES ]; then cat .env; fi;
   # - cat .env
   - echo "Hello world"
