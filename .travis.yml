@@ -25,4 +25,5 @@ install:
   - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
 
 script:
-  -   bash ./.travis/tests.sh
+  - bash ./.travis/tests.sh
+  - docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"
