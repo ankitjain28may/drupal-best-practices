@@ -29,8 +29,9 @@ install:
 script:
   # - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core
   # - docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core
-  - if [ $ABC == true ]; then cat .env; else echo "Hy"; fi;
+  # - if [ $ABC == true ]; then cat .env; else echo "Hy"; fi;
 
-  - if [ $BUILD_CHECK_PHPUNIT == true ]; then cat .env; else echo "rg"; fi;
+  # - if [ $BUILD_CHECK_PHPUNIT == true ]; then cat .env; else echo "rg"; fi;
   # - cat .env
-  - echo "Hello world"
+  # - echo "Hello world"
+  -   ./.travis/tests.sh
