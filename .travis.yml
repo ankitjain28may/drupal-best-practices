@@ -9,7 +9,8 @@ python: 2.7
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
-  ABC: true
+  ABC: false
+  BUILD_CHECK_PHPUNIT: true
 
 before_install:
   - cp .env.travis .env
