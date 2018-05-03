@@ -37,4 +37,5 @@ install:
 script:
   # - if [ ${BUILD_CHECK_PHPCS} = 'YES' ]; then docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core; fi;
   # - if [ ${BUILD_CHECK_PHPUNIT} = 'YES' ]; then docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core; fi;
-  - $SAVE_PREVIOUS_DB_DUMP
+  - if [ ${BUILD_CHECK_PHPUNIT} = 'YES' ]; then pip install getit; fi;
+  # - $SAVE_PREVIOUS_DB_DUMP
