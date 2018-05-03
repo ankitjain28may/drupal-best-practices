@@ -6,38 +6,27 @@ services:
   - docker
 
 python: 2.7
-# php:
-  # - 7.2
 
-# env:
-#   global:
-#     - SIMPLETEST_DB=sqlite://tmp/site.sqlite
-#     - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
-#   matrix:
-#     - RELEASE=stable COMPOSER_CHANNEL=stable
-#     - RELEASE=dev COMPOSER_CHANNEL=stable
-#     - RELEASE=stable COMPOSER_CHANNEL=snapshot
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
-  BUILD_CHECK_PHPCS: NO
-  BUILD_CHECK_PHPUNIT: YES
+  ABC: YES
 
 before_install:
   - cp .env.travis .env
-  # - sudo apt-get update -qq
-  # - pip install ansible
+  - sudo apt-get update -qq
+  - pip install ansible
 
-  # - sudo rm /usr/local/bin/docker-compose
-  # - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  # - chmod +x docker-compose
-  # - sudo mv docker-compose /usr/local/bin
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
-  # - docker-compose up -d
-  # - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
+  - docker-compose up -d
+  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
 
 script:
-  # - if [ ${BUILD_CHECK_PHPCS} = 'YES' ]; then docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core; fi;
-  # - if [ ${BUILD_CHECK_PHPUNIT} = 'YES' ]; then docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core; fi;
-  - if [[ $BUILD_CHECK_PHPUNIT = 'YES' ]]; then pip install getit; fi;
-  # - $SAVE_PREVIOUS_DB_DUMP
+  # - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core
+  # - docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core
+  - if [[ $ABC = YES ]]; then echo "HelloWorld"; fi;
+  - cat .env
