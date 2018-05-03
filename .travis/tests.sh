@@ -20,5 +20,5 @@ fi
 
 if [ $BUILD_CHECK_PHPUNIT == true ]; then
     echo "Running phpunit tests"
-    docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./web/core
+    docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"
 fi
