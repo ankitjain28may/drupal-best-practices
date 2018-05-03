@@ -34,4 +34,4 @@ script:
   # - if [ $BUILD_CHECK_PHPUNIT == true ]; then cat .env; else echo "rg"; fi;
   # - cat .env
   # - echo "Hello world"
-  -   ./.travis/tests.sh
+  -   bash ./.travis/tests.sh
