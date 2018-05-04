@@ -1,5 +1,7 @@
 # Drupal Best Practices
 
+[![Build Status](https://travis-ci.org/ankitjain28may/drupal-best-practices.svg?branch=master)](https://travis-ci.org/ankitjain28may/drupal-best-practices)
+
 This project template provides a starter kit for managing Drupal Workflow using [Ansible](https://www.ansible.com/), [Docker](https://docker.com/), [Git](https://git-scm.com/) and [Composer](https://getcomposer.org/)
 
 You can manage multiple sites like production/development and staging servers through this project, All your environment will setup, install dependencies and Sync Configuration in a single click.
@@ -68,6 +70,14 @@ Add and Set Variables under group_vars variable for your defined groups.
   will have following roles -
   `{backup}`
 
+7. **drupal.travis.prod.yml** is configured to integrate Continuous Integration and Continuous Deployment -
+
+  ```shell
+    ansible-playbook ansible/drupal.travis.prod.yml
+  ```
+  will have following roles -
+  `{docker-build, composer, drupal}`
+
 ### Roles
 
 1. **backup** - It will rename `html` folder to `backup` folder and create empty `html` folder under `/var/www` directory.
@@ -98,13 +108,11 @@ Add and Set Variables under group_vars variable for your defined groups.
 
 Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package
 
-> This project will have three images from which we create two containers.
+> This project will have two images from which we create two containers.
 
 1. [mariadb](https://hub.docker.com/_/mariadb/) image from [Docker hub](https://hub.docker.com) for creating database container.
 
-2. [Ubuntu](https://hub.docker.com/_/ubuntu/) V16.04 image from [Docker hub](https://hub.docker.com) for generating image using Dockerfile.
-
-3. [ankitjain28/php-nginx-composer](https://hub.docker.com/r/ankitjain28/php-nginx-composer/) install nginx, php7.2 with its extensions and composer. This image is maintained by me under Github Repo [php-nginx-composer](https://github.com/ankitjain28may/php-nginx-composer)
+2. [ankitjain28/php-nginx-composer](https://hub.docker.com/r/ankitjain28/php-nginx-composer/) install nginx, php7.2 with its extensions and composer. This image is maintained by me under Github Repo [php-nginx-composer](https://github.com/ankitjain28may/php-nginx-composer)
 
 ### Docker Compose
 
@@ -151,10 +159,11 @@ It depends on **drupaldb** container for database.
 ## One Click Installation
 
   ```shell
-    ansible-playbook ansible/drupal.production.yml
+    ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop
   ```
 
-  will deploy your drupal site on all the hosts.
+  will deploy your drupal site on all the hosts from the inventory file.
+> Default inventory file is loaded from `ansible.cfg`.
 
 ## Install Drupal on Localhost (Locally)
 
@@ -171,6 +180,29 @@ It depends on **drupaldb** container for database.
 For more information about managing dependencies and sync configuration, Read here -
 
  - [The best way to manage your Drupal workflow](http://ankitjain28.me/best-way-managing-drupal-workflow)
+
+## Continous Integration
+
+For Continuous Integration, We are using Travic-Ci.
+Each time we pushes through Git, Travis is triggred and checks for Code Quality (Using CodeSniffer) and Unit Tests (Using PHPunit).
+
+You can skip these in `.travis.yml` file by setting `env` variables value.
+
+```
+  env:
+    BUILD_CHECK_PHPCS: false
+    BUILD_CHECK_PHPUNIT: false
+    DEPLOY: true
+```
+
+## Continous Deployment
+
+On Successful Build, Travis will deploy the changes to the server using Ansible. Ansible will connect to server through SSH username and Password. Password will be saved in Travis-CI env variable in a secure mode so it wont be visible during build.
+Password Key should be - `ssh_pass`
+
+It will automatically deploy the changes to your deploying server.
+
+**Note** : Travis configuration will be set in `.env.travis` and `travis.yml` under group_vars dir and You can add your own custom roles under `roles` and called them from `drupal.travis.prod.yml` for travis configuration.
 
 ## Contribute :
 
