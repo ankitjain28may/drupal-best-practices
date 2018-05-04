@@ -9,27 +9,24 @@ python: 2.7
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
-  ABC: YES
 
 before_install:
   - cp .env.travis .env
-  # - sudo apt-get update -qq
-  # - pip install ansible
+  - sudo apt-get update -qq
+  - pip install ansible
 
-  # - sudo rm /usr/local/bin/docker-compose
-  # - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  # - chmod +x docker-compose
-  # - sudo mv docker-compose /usr/local/bin
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - sudo apt-get install sshpass
 
 install:
-  # - docker-compose up -d
-  # - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
+  - docker-compose up -d
+  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
+  - ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}
 
 script:
-  # - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/core
-  # - docker exec -it drupal vendor/bin/phpunit --testsuite=unit ./core
-  - if [ ${ABC} == YES ]; then cat .env; else echo "Hy"; fi;
-
-  - if [ ${BUILD_CHECK_PHPUNIT} = YES ]; then cat .env; fi;
-  # - cat .env
-  - echo "Hello world"
+  - docker exec -it drupal vendor/bin/phpcbf --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib
+  - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib
+  - docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"
