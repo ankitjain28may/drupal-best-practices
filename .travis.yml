@@ -9,7 +9,7 @@ python: 2.7
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
-  BUILD_CHECK_PHPCS: false
+  BUILD_CHECK_PHPCS: true
   BUILD_CHECK_PHPUNIT: false
 
 before_install:
@@ -30,5 +30,6 @@ script:
   - if [ $BUILD_CHECK_PHPUNIT == true ]; then docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"; fi;
 
 after_success:
+  - echo $TRAVIS_BRANCH
   - if [ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false"]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; fi;
 
