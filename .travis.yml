@@ -32,6 +32,6 @@ script:
 after_success:
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
-  - if [ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false"]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; else echo "HW"; fi;
-  - if [ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false"]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; fi;
+  - if [ $TRAVIS_BRANCH == master && $TRAVIS_PULL_REQUEST == false ]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; else echo "HW"; fi;
+  - if [ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; fi;
 
