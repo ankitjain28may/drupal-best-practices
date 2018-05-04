@@ -9,12 +9,13 @@ python: 2.7
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
+  BUILD_CHECK_PHPCS: false
+  BUILD_CHECK_PHPUNIT: false
 
 before_install:
   - cp .env.travis .env
   - sudo apt-get update -qq
   - pip install ansible
-
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
@@ -22,11 +23,12 @@ before_install:
   - sudo apt-get install sshpass
 
 install:
-  - docker-compose up -d
   - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
-  - ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}
 
 script:
-  - docker exec -it drupal vendor/bin/phpcbf --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib
-  - docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib
-  - docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"
+  - if [ $BUILD_CHECK_PHPCS == true ]; then docker exec -it drupal vendor/bin/phpcbf --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib; docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib; fi;
+  - if [ $BUILD_CHECK_PHPUNIT == true ]; then docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"; fi;
+
+after_success:
+  - if [ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false"]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; fi;
+
