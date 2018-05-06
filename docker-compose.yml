@@ -1,20 +1,5 @@
 version: '2'
 services:
-  drupal:
-    image: "ankitjain28/php-nginx-composer:latest"
-    container_name: drupal
-    ports:
-      - "${APP_PORT}:80"
-      - "8028:22"
-    environment:
-      APP_PORT: '${APP_PORT}'
-    volumes:
-      - .:/var/www/html
-    links:
-      - "drupaldb:mysql"
-    networks:
-      - drupal
-    restart: always
   drupaldb:
     image: "mariadb"
     container_name: drupaldb
@@ -24,6 +9,34 @@ services:
       MYSQL_DATABASE: '${MYSQL_DATABASE}'
       MYSQL_ROOT_PASSWORD: '${MYSQL_PASSWORD}'
       DB_PATH: '${DB_PATH}'
+    networks:
+      - drupal
+    restart: always
+  drupal:
+    build: ./docker/php/
+    image: "php-fpm-composer"
+    container_name: drupal
+    volumes:
+      - .:/var/www/html
+    links:
+      - "drupaldb:mysql"
+    networks:
+      - drupal
+    restart: always
+  nginx:
+    image: "nginx:alpine"
+    container_name: nginx
+    ports:
+      - "${APP_PORT}:80"
+      - "8028:22"
+    environment:
+      APP_PORT: '${APP_PORT}'
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www/html
+    links:
+      - "drupaldb:mysql"
+      - "drupal:php"
     networks:
       - drupal
     restart: always

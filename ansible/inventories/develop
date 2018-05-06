@@ -1,5 +1,5 @@
 [digitalocean]
-139.59.18.27 ansible_user=root
+139.59.67.196 ansible_user=root
 
 [localhost]
 localhost
