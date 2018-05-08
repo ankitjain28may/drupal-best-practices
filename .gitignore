@@ -24,3 +24,5 @@
 /.env
 
 /ansible/*.retry
+
+/.docker-sync

@@ -4,6 +4,11 @@
   command: docker rm drupal drupaldb -f
   ignore_errors: yes
 
+- name: Starting Docker Sync
+  command: docker-sync start
+  args:
+    chdir: "{{project_dir}}/{{project_folder_name}}"
+
 - name: Running the docker compose in detach mode
   command: docker-compose up -d
   async: 1000
