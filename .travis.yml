@@ -16,6 +16,7 @@ env:
 before_install:
   - cp .env.travis .env
   - sudo apt-get update -qq
+  - sudo apt-get install ruby-dev
   - pip install ansible
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose

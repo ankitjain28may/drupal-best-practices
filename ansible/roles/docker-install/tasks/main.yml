@@ -90,6 +90,14 @@
   tags:
     - docker
 
+- name: Installing Ruby Dev
+  apt:
+    name: ruby-dev
+    state: present
+    update_cache: yes
+  tags:
+    - docker
+
 - name: Installing docker-sync
   gem:
     name: docker-sync
