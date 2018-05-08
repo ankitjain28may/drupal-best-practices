@@ -1,0 +1,12 @@
+---
+
+#// user account used to ssh the hosts
+remote_user:
+docker_group:
+github_repo:
+staging_branch:
+env_file:
+backup_dir:
+project_dir:
+project_folder_name:
+backup_folder_name:

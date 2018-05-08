@@ -1,8 +1,8 @@
 [digitalocean]
-139.59.18.27 ansible_user=root
+example.com ansible_user=root
 
 [aws]
-ip ansible_user=ubuntu
+example.me ansible_user=ubuntu
 
 [production:children]
 digitalocean
