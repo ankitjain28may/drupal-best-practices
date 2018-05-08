@@ -5,9 +5,7 @@
   ignore_errors: yes
 
 - name: Starting Docker Sync
-  command: docker-sync
-  args:
-    chdir: "{{project_dir}}/{{project_folder_name}}"
+  command: docker-sync start
 
 - name: Running the docker compose in detach mode
   command: docker-compose up -d
