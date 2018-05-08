@@ -1,0 +1,4 @@
+version: '2'
+syncs:
+  drupal-sync:
+    src: './'

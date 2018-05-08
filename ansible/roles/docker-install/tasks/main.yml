@@ -57,21 +57,21 @@
     - docker
 
 # sudo groupadd docker
-- name: Creating "docker" group
-  group:
-    name: "{{ docker_group }}"
-    state: present
-  tags:
-    - docker
+# - name: Creating "docker" group
+#   group:
+#     name: "{{ docker_group }}"
+#     state: present
+#   tags:
+#     - docker
 
-# sudo usermod -aG docker ubuntu
-- name: Adding remote "ubuntu" user to "docker" group
-  user:
-    name: "{{ remote_user }}"
-    group: "{{ docker_group }}"
-    append: yes
-  tags:
-    - docker
+# # sudo usermod -aG docker ubuntu
+# - name: Adding remote "ubuntu" user to "docker" group
+#   user:
+#     name: "{{ remote_user }}"
+#     group: "{{ docker_group }}"
+#     append: yes
+#   tags:
+#     - docker
 
 # sudo apt-get install docker-compose
 - name: Installing docker-compose
@@ -79,5 +79,20 @@
     name: docker-compose
     state: present
     update_cache: yes
+  tags:
+    - docker
+
+- name: Installing Ruby
+  apt:
+    name: ruby
+    state: present
+    update_cache: yes
+  tags:
+    - docker
+
+- name: Installing docker-sync
+  gem:
+    name: docker-sync
+    state: present
   tags:
     - docker

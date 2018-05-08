@@ -17,7 +17,8 @@ services:
     image: "php-fpm-composer"
     container_name: drupal
     volumes:
-      - .:/var/www/html
+      # - .:/var/www/html
+      - drupal-sync:/var/www/html:nocopy
     links:
       - "drupaldb:mysql"
     networks:
@@ -33,7 +34,8 @@ services:
       APP_PORT: '${APP_PORT}'
     volumes:
       - ./docker/php/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - .:/var/www/html
+      # - .:/var/www/html
+      - drupal-sync:/var/www/html:nocopy
     links:
       - "drupaldb:mysql"
       - "drupal:php"
@@ -41,5 +43,8 @@ services:
       - drupal
     restart: always
 
+volumes:
+  drupal-sync:
+    external: true
 networks:
   drupal:

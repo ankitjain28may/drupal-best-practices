@@ -24,12 +24,16 @@ services:
     environment:
       APP_PORT: '${APP_PORT}'
     volumes:
-      - .:/var/www/html
+      # - .:/var/www/html
+      - drupal-sync:/var/www/html:nocopy
     links:
       - "drupaldb:mysql"
     networks:
       - drupal
     restart: always
 
+volumes:
+  drupal-sync:
+    external: true
 networks:
   drupal:

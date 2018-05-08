@@ -1,7 +1,7 @@
 ---
 
 - name: Install Docker and Setup Env on local
-  hosts: localhost
+  hosts: local
   become: true
   roles:
     - docker-install

@@ -1,6 +1,6 @@
 ---
 
-- name: Deleting previous images if found
+- name: Deleting previous containers if found
   command: docker rm drupal drupaldb -f
   ignore_errors: yes
 
