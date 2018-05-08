@@ -6,6 +6,7 @@
 
 - name: Starting Docker Sync
   command: docker-sync start
+  ignore_errors: yes
 
 - name: Running the docker compose in detach mode
   command: docker-compose up -d
