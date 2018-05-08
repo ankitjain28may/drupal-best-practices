@@ -24,11 +24,11 @@ before_install:
   - sudo apt-get install sshpass
 
 install:
-  - ansible-playbook ansible/playbooks/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
+  - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/develop
 
 script:
   - if [ $BUILD_CHECK_PHPCS == true ]; then docker exec -it drupal vendor/bin/phpcbf --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib; docker exec -it drupal vendor/bin/phpcs --standard=Drupal -p ./web/themes/contrib ./web/modules/contrib; fi;
   - if [ $BUILD_CHECK_PHPUNIT == true ]; then docker exec -it drupal /bin/sh -c "cd web/core &&  ../../vendor/bin/phpunit --testsuite=unit"; fi;
 
 after_success:
-  - if [ $TRAVIS_BRANCH == master ] && [ $TRAVIS_PULL_REQUEST == false ] && [ $DEPLOY == true ]; then ansible-playbook ansible/playbooks/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; fi;
+  - if [ $TRAVIS_BRANCH == master ] && [ $TRAVIS_PULL_REQUEST == false ] && [ $DEPLOY == true ]; then ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop -e ansible_ssh_pass=${ssh_pass}; fi;

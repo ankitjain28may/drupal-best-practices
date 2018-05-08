@@ -96,7 +96,7 @@ Ansible playbooks looks like -
   - role1
   - role2
 ```
-Add your hosts name in existing playbooks defined in subdirectory called `playbooks` or create your own custom playbooks.
+Add your hosts name in existing playbooks defined in `drupal.*.yml` under `ansible` dir or create your own custom playbooks.
 
 ### Playbooks
 
@@ -105,7 +105,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 1. **drupal.development.yml** is configured for your development environment -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.development.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.development.yml -i <inventory_path>
   ```
   have following roles -
   `{git-pull, env, restart, composer, drupal}`
@@ -113,7 +113,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 2. **drupal.docker-install.yml** is configured to install docker and docker-compose -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.docker-install.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.docker-install.yml -i <inventory_path>
   ```
   have following roles -
   `{docker-install}`
@@ -121,7 +121,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 3. **drupal.production.yml** is configured to setup site on production server -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.production.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.production.yml -i <inventory_path>
   ```
   have following roles -
   `{backup, docker-install, git-clone, git-hooks, env, docker-build, composer-prod, drupal}`
@@ -129,7 +129,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 4. **drupal.restore-backup.yml** is configured to restore backup on your server -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.restore-backup.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.restore-backup.yml -i <inventory_path>
   ```
   have following roles -
   `{restore, docker-build, composer-prod, drupal}`
@@ -137,7 +137,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 5. **drupal.staging.yml** is configured to setup site on staging server -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.staging.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.staging.yml -i <inventory_path>
   ```
   have following roles -
   `{backup, docker-install, git-stage, git-hooks, env, restart, composer, drupal}`
@@ -145,7 +145,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 6. **drupal.backup.yml** is configured to backup your site on server -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.backup.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.backup.yml -i <inventory_path>
   ```
   have following roles -
   `{backup}`
@@ -153,7 +153,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 7. **drupal.local.yml** is configured to configure development environment on your local system -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.local.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.local.yml -i <inventory_path>
   ```
   have following roles -
   `{docker-install, git-hooks, docker-build, composer, drupal}`
@@ -161,7 +161,7 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 8. **drupal.travis.prod.yml** is configured to integrate Continuous Integration and Continuous Deployment -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.travis.prod.yml -i <inventory_path>
+    ansible-playbook ansible/drupal.travis.prod.yml -i <inventory_path>
   ```
   have following roles -
   `{docker-build, composer, drupal}`
@@ -193,7 +193,6 @@ In this project, Total 8 playbooks are defined to help you, Detailed description
 12. **restart** - Restart Docker containers.
 
 13. **restore** - Restore previously generated `backup` folder to `html` and `html` to `backup`.
-
 
 ## Docker
 
@@ -237,7 +236,7 @@ It depends on **drupaldb** container for database.
 ## One Click deployment
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.production.yml -i ansible/inventories/develop
+    ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop
   ```
 
   will deploy your drupal site on all the hosts from the inventory file.
@@ -251,7 +250,7 @@ It depends on **drupaldb** container for database.
 2. Run this command -
 
   ```shell
-    ansible-playbook ansible/playbooks/drupal.local.yml --connection=local --extra-vars "ansible_sudo_pass=<local-system-password>"
+    ansible-playbook ansible/drupal.local.yml --connection=local --extra-vars "ansible_sudo_pass=<local-system-password>"
   ```
 
 > All the dependencies are managed using Composer.
