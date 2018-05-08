@@ -101,6 +101,6 @@
 - name: Installing docker-sync
   gem:
     name: docker-sync
-    state: present
+    state: latest
   tags:
     - docker
