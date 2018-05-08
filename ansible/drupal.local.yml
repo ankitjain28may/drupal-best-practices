@@ -1,0 +1,11 @@
+---
+
+- name: Install Docker and Setup Env on local
+  hosts: localhost
+  become: true
+  roles:
+    - docker-install
+    - git-hooks
+    - docker-build
+    - composer
+    - drupal

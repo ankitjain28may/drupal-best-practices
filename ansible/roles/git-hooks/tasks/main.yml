@@ -1,0 +1,9 @@
+---
+
+- name: Adding Git Hooks on Commit
+  command: cp {{project_dir}}/{{project_folder_name}}/.githooks/pre-commit {{project_dir}}/{{project_folder_name}}/.git/hooks/pre-commit
+
+- name: Giving 755 permission to hooks
+  file:
+    path: "{{project_dir}}/{{project_folder_name}}/.git/hooks/pre-commit"
+    mode: u=rwx,g=rwx,o=rx

@@ -13,20 +13,30 @@ services:
       - drupal
     restart: always
   drupal:
-    # Pull directly from Dockerhub
-    image: "ankitjain28/php-nginx-composer:latest"
-    # build: ./docker/php-nginx-composer/
-    # image: "php-nginx-composer"
+    build: ./docker/php/
+    image: "php-fpm-composer"
     container_name: drupal
+    volumes:
+      - .:/var/www/html
+    links:
+      - "drupaldb:mysql"
+    networks:
+      - drupal
+    restart: always
+  nginx:
+    image: "nginx:alpine"
+    container_name: nginx
     ports:
       - "${APP_PORT}:80"
       - "8028:22"
     environment:
       APP_PORT: '${APP_PORT}'
     volumes:
+      - ./docker/php/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - .:/var/www/html
     links:
       - "drupaldb:mysql"
+      - "drupal:php"
     networks:
       - drupal
     restart: always

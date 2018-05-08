@@ -7,6 +7,7 @@
     - backup
     - docker-install
     - git-clone
+    - git-hooks
     - env
     - docker-build
     - composer-prod
