@@ -56,3 +56,6 @@ if [ $EXPORT_DB_DUMP_ON_COMMIT = true ]; then
     docker exec drupaldb mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE  > $DB_PATH
     git add $DB_PATH
 fi
+
+echo "Checking for files changed"
+git status
