@@ -20,8 +20,6 @@
         "drupal-composer/drupal-scaffold": "^2.2",
         "drupal/console": "^1.0.2",
         "drupal/core": "~8.5.1",
-        "drupal/disqus": "^1.0",
-        "drupal/mediumish_blog": "^1.5",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",

@@ -40,16 +40,19 @@ NEW_FILE="${DB_PATH%*.sql}"-$CURRENT_DATE_TIME.sql
 if [ $EXPORT_CONFIG_ON_COMMIT = true ]; then
     echo "Exporting the Configuration"
     docker exec drupal composer drupal config:export
+    git add drupal/config/sync
 fi
 
 # Save previous dump
 if [ $SAVE_PREVIOUS_DB_DUMP = true ]; then
     echo "Saving Previous Dump as "$NEW_FILE
     mv $DB_PATH $NEW_FILE
+    git add $NEW_FILE
 fi
 
 # Export the Database dump
 if [ $EXPORT_DB_DUMP_ON_COMMIT = true ]; then
     echo "Exporting Database Dump"
     docker exec drupaldb mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE  > $DB_PATH
+    git add $DB_PATH
 fi
