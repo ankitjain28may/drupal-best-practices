@@ -1,6 +1,6 @@
 ---
 
-#// user account used to ssh the hosts
+#// This file is set up for running ansible on travis
 remote_user: ubuntu
 docker_group: docker
 github_repo: 'https://github.com/ankitjain28may/drupal-best-practices.git'

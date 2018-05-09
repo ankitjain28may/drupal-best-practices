@@ -14,11 +14,27 @@ You should have python2.7 installed on your server so that Ansible can use its m
 
   Let's see how to use and implement this project kit.
 
-### Configure .env file
+### Step 1 - Clone or Download the current repo
 
-You need to create `.env` file for each deploying server. It will also be managed by ansible automatically. You need to create `.env.<hostname>` file and add `<hostname>` name in `env_file` variable in host group_var file.
+```shell
+  git clone https://github.com/ankitjain28may/drupal-best-practices.git <project_name>
+```
 
-`cp .env.example .env.<hostname>`
+### Step 2 - Configure env file
+
+**For Server :**
+
+  You need to create `.env` file for each deploying server. It will also be managed by ansible automatically. You need to create `.env.<hostname>` file and add `<hostname>` name in `env_file` variable in host group_var file.
+
+  `cp .env.example .env.<hostname>`
+
+**For Local :**
+
+  Copy .env.example file to .env
+  ```shell
+    cp .env.example .env
+  ```
+>Example -
 
 ```
   APP_ENV=
@@ -37,34 +53,67 @@ You need to create `.env` file for each deploying server. It will also be manage
   EXPORT_DB_DUMP_ON_COMMIT=true
 ```
 
-**Note** : For configuring on Local system, create .env file and set configs.
+### Step 3 - Configure Ansible inventories and playbooks
 
-Copy .env.example file to .env
-```shell
-  cp .env.example .env
-```
+**For Server :**
 
+  1. Add hosts name in Ansible Inventory under `ansible/inventories`.
 
+  2. Once inventory hosts are listed, variables can be assigned to them in yml files (in a subdirectory called `group_vars`).
 
-## One Click deployment
+  ```shell
+    cp example.yml <hostname>.yml
+  ```
+
+  3. Add hosts in existing ansible playbooks, or you can create your custom playbooks and roles.
+
+**For Local :**
+
+  1. Hosts is already added in develop file under inventories with name `local`
+
+  ```
+    [local]
+    localhost
+  ```
+  2. Config env vars in `local.yml` file in a subdirectory called `group_vars`
+
+  ```
+    backup_dir: '/var/www/backup'
+    project_dir: '/var/www/html'
+    project_folder_name: 'drupal'
+    backup_folder_name: 'drupal-backup'
+  ```
+
+**Note** : Read more about Ansible in [Ansible dir](https://github.com/ankitjain28may/drupal-best-practices/tree/master/ansible)
+
+### Step 4 - Deployment
+
+  Run ansible-playbooks with the path to the inventory file.
+
+**For Server :**
+
+  Various playbooks are defined in this project, you can deploy as per your requirements.
 
   ```shell
     ansible-playbook ansible/drupal.production.yml -i ansible/inventories/develop
   ```
-
   will deploy your drupal site on all the hosts from the inventory file.
 
-> Default inventory file is loaded from `ansible.cfg`.
+**For Local :**
 
-## Install Drupal on Localhost (Locally)
-
-1. Set group_vars for the localhost host in `localhost.yml` file in `ansible/group_vars` directory.
-
-2. Run this command -
+  Run `drupal.local.yml` playbook
 
   ```shell
     ansible-playbook ansible/drupal.local.yml --connection=local --extra-vars "ansible_sudo_pass=<local-system-password>"
   ```
+
+**Note** : Read more about Ansible playbooks in [Ansible dir](https://github.com/ankitjain28may/drupal-best-practices/tree/master/ansible)
+
+**Note** : Default inventory file is loaded from `ansible.cfg`.
+
+> All the services like php, nginx and mysql are automatically managed by Docker through docker-compose.
+
+Read more about Docker and docker-compose in - [Docker dir](https://github.com/ankitjain28may/drupal-best-practices/tree/master/docker)
 
 > All the dependencies are managed using Composer.
 
@@ -94,7 +143,7 @@ Password Key should be - `ssh_pass`
 
 It will automatically deploy the changes to your deploying server.
 
-**Note** : Travis configuration will be set in `.env.travis` and `travis.yml` under group_vars dir and You can add your own custom roles under `roles` and called them from `drupal.travis.prod.yml` playbook for travis configuration.
+**Note** : Travis configuration will be set in `.env.travis`, `travis`, `travis.yml` and `drupal.travis.prod.yml`. You can add your own custom roles under `roles` and called them from `drupal.travis.prod.yml` playbook for travis configuration.
 
 ## Future Implementation
 

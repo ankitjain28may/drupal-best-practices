@@ -1,5 +1,6 @@
 ---
 
+# This is to configure the complete setup on Travis
 - name: Configuration to "remote" host
   hosts: travis
   become: true
