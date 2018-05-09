@@ -1,7 +1,8 @@
 version: '2'
 services:
   drupaldb:
-    image: "mariadb"
+    build: ./docker/mariadb/
+    image: drupal-mariadb
     container_name: drupaldb
     volumes:
       - ${DB_PATH}:/docker-entrypoint-initdb.d/dump.sql
@@ -13,21 +14,33 @@ services:
       - drupal
     restart: always
   drupal:
-    # Pull directly from Dockerhub
-    image: "ankitjain28/php-nginx-composer:latest"
-    # build: ./docker/php-nginx-composer/
-    # image: "php-nginx-composer"
+    build: ./docker/php/
+    image: "drupal-php"
     container_name: drupal
+    volumes:
+      # - .:/var/www/html
+      - drupal-sync:/var/www/html:nocopy
+    links:
+      - "drupaldb:mysql"
+    networks:
+      - drupal
+    restart: always
+  nginx:
+    build: ./docker/nginx
+    image: drupal-nginx
+    container_name: nginx
     ports:
       - "${APP_PORT}:80"
       - "8028:22"
     environment:
       APP_PORT: '${APP_PORT}'
     volumes:
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
       # - .:/var/www/html
       - drupal-sync:/var/www/html:nocopy
     links:
       - "drupaldb:mysql"
+      - "drupal:php"
     networks:
       - drupal
     restart: always

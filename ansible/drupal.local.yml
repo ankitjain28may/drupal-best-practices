@@ -4,8 +4,8 @@
   hosts: local
   become: true
   roles:
-    - docker-install
-    - git-hooks
+    # - docker-install
+    # - git-hooks
     - docker-build
     - composer
     - drupal

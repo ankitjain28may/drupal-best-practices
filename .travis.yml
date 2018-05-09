@@ -26,6 +26,7 @@ before_install:
   - sudo apt-get install sshpass
 
 install:
+  - docker-sync start
   - ansible-playbook ansible/drupal.travis.prod.yml --connection=local -i ansible/inventories/travis
 
 script:

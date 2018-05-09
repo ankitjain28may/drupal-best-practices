@@ -33,5 +33,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 EXPOSE 80 3306 22
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/drupal
 

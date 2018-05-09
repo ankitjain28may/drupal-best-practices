@@ -11,7 +11,7 @@ use Dotenv\Exception\InvalidPathException;
 /**
  * Load any .env file. See /.env.example.
  */
-$dotenv = new Dotenv(__DIR__);
+$dotenv = new Dotenv(__DIR__.'/../');
 try {
   $dotenv->load();
 }
