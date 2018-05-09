@@ -2,6 +2,7 @@
 
 - name: Deleting drupaldb container
   command: docker rm drupaldb -f
+  ignore_errors: yes
 
 - name: Recreating drupaldb container
   command: docker-compose up -d drupaldb
