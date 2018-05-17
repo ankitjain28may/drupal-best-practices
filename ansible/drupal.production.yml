@@ -1,7 +1,7 @@
 ---
 
 - name: Configuration to "remote" host
-  hosts: develop
+  hosts: drupal
   become: true
   roles:
     - backup
